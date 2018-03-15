@@ -82,7 +82,7 @@ int main()
         
         inFile.close();
         
-        // print out the registers values
+        // print out the registers values now
         for(int i = 0; i < 32; i++)
             cout << "x" << dec << i << ": \t"<< "0x" << hex << std::setfill('0') << std::setw(8) << regs[i] << "\n";
     }

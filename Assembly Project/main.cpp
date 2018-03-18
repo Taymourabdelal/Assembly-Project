@@ -35,6 +35,7 @@ void printPrefix(unsigned int instA, unsigned int instCode)
 
 void instAssembleExec(instWord&inst)
 {
+    // why isnt this working
     //Generate instruction machine code
     
     //execute instruction

@@ -82,7 +82,7 @@ string format ( string funct)
 //
 //    while (!code.refrenceInput.eof())
 //    {
-//
+//        get the opcode , funct
 //    }
 //
 //

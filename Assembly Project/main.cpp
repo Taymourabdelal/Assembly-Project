@@ -33,6 +33,16 @@ void printPrefix(unsigned int instA, unsigned int instCode)
     cout << "0x" << hex << std::setfill('0') << std::setw(8) << instA << "\t0x" << hex << std::setw(8) << instCode;
 }
 
+void parse (instWord &W)
+{
+    if (W.instText.find("addi"))
+    {
+        W.opcode = 1111;
+        
+    }
+    
+}
+
 void instAssembleExec(instWord&inst)
 {
     // why isnt this working
@@ -74,7 +84,7 @@ int main()
         {
             getline (inFile, W.instText);
             
-            //parse(W);        //parse instText into its instruction format fields
+            parse(W);        //parse instText into its instruction format fields
             instAssembleExec(W);   //Generate instruction machine code and execute instruction
             printPrefix(pc, W.instMachineCode);
 

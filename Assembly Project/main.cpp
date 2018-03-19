@@ -20,6 +20,7 @@ struct instWord
 };
 int regs[32]={0};
 unsigned int pc = 0x0;
+
 char memory[8*1024];    // 8KB of memory located at address 0
 
 void emitError(char *s)
@@ -33,19 +34,35 @@ void printPrefix(unsigned int instA, unsigned int instCode)
     cout << "0x" << hex << std::setfill('0') << std::setw(8) << instA << "\t0x" << hex << std::setw(8) << instCode;
 }
 
-void parse (instWord &W)
+void parse (instWord &W) // Function-Parse
 {
-    if (W.instText.find("addi"))
-    {
-        W.opcode = 1111;
-        
-    }
+    string s = W.instText;
+    string funct , rs, rd ,rt;
+    
+   funct =  s.substr (0 , s.find(' '));
+    s.erase(0 , s.find(' '));
+
+    rs = s.substr(0 ,s.find(','));
+    s.erase(0 , s.find(',')+1);
+    
+    
+    
+    rd = s.substr(0 ,s.find(','));
+    s.erase(0 , s.find(',')+1);
+    
+    rt = s.substr(0 ,s.size());
+
+    
+    cout << funct << endl;
+     cout << rs << endl;
+     cout << rd << endl;
+     cout << rt << endl;
     
 }
 
 void instAssembleExec(instWord&inst)
 {
-    // why isnt this working
+ 
     //Generate instruction machine code
     
     //execute instruction
@@ -85,8 +102,8 @@ int main()
             getline (inFile, W.instText);
             
             parse(W);        //parse instText into its instruction format fields
-            instAssembleExec(W);   //Generate instruction machine code and execute instruction
-            printPrefix(pc, W.instMachineCode);
+            //instAssembleExec(W);   //Generate instruction machine code and execute instruction
+           // printPrefix(pc, W.instMachineCode);
 
             pc += 4;
         }

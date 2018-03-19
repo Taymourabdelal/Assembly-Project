@@ -1,5 +1,5 @@
 main:
-addi	x10,x0,8
+add	x10,x0,8
 addi	x11,x0,2
 jal	x1,mydiv
 addi	x10,x0,0xA		# calls exit command (code 10)

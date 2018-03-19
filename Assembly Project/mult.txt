@@ -1,6 +1,6 @@
-addi	x18,x0,20
-addi	x9,x0,30
-addi	x8,x0,0			# the product
+ADD x18,x0,20
+Add x9,x0,30
+ADD x8,x0,0			# the product
 while:
 bge	x0,x18,endWhile
 add	x8,x8,x9

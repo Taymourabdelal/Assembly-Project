@@ -597,13 +597,13 @@ string machinecode (string s ,string input) //machinecode
         
         I_imm = input.substr(0 ,input.size());
         
-        I_imm = removeExtras(rs2);
+        I_imm = removeExtras(I_imm);
         rs1 = removeExtras(rs1);
         rd = removeExtras(rd);
         
         regs[stoi(rd)] = regs[stoi(rs1)] + stoi(I_imm);
         
-        I_imm = toBinStr(stoi(rs2));
+        I_imm = toBinStr(stoi(I_imm));
         rd = toBinStr(stoi(rd));
         rs1 = toBinStr(stoi(rs1));
         
@@ -636,7 +636,7 @@ string machinecode (string s ,string input) //machinecode
         
         I_imm = input.substr(0 ,input.size());
         
-        I_imm = removeExtras(rs2);
+        I_imm = removeExtras(I_imm);
         rs1 = removeExtras(rs1);
         rd = removeExtras(rd);
         
@@ -645,7 +645,7 @@ string machinecode (string s ,string input) //machinecode
         else
             regs[stoi(rd)] = 0;
         
-        I_imm = toBinStr(stoi(rs2));
+        I_imm = toBinStr(stoi(I_imm));
         rd = toBinStr(stoi(rd));
         rs1 = toBinStr(stoi(rs1));
         
@@ -676,13 +676,13 @@ string machinecode (string s ,string input) //machinecode
         
         I_imm = input.substr(0 ,input.size());
         
-        I_imm = removeExtras(rs2);
+        I_imm = removeExtras(I_imm);
         rs1 = removeExtras(rs1);
         rd = removeExtras(rd);
         
         regs[stoi(rd)] = regs[stoi(rs1)] | stoi(I_imm);
         
-        I_imm = toBinStr(stoi(rs2));
+        I_imm = toBinStr(stoi(I_imm));
         rd = toBinStr(stoi(rd));
         rs1 = toBinStr(stoi(rs1));
         
@@ -714,13 +714,13 @@ string machinecode (string s ,string input) //machinecode
         
         I_imm = input.substr(0 ,input.size());
         
-        I_imm = removeExtras(rs2);
+        I_imm = removeExtras(I_imm);
         rs1 = removeExtras(rs1);
         rd = removeExtras(rd);
         
         regs[stoi(rd)] = regs[stoi(rs1)] ^ stoi(I_imm);
         
-        I_imm = toBinStr(stoi(rs2));
+        I_imm = toBinStr(stoi(I_imm));
         rd = toBinStr(stoi(rd));
         rs1 = toBinStr(stoi(rs1));
         
@@ -751,13 +751,13 @@ string machinecode (string s ,string input) //machinecode
         
         I_imm = input.substr(0 ,input.size());
         
-        I_imm = removeExtras(rs2);
+        I_imm = removeExtras(I_imm);
         rs1 = removeExtras(rs1);
         rd = removeExtras(rd);
         
         regs[stoi(rd)] = regs[stoi(rs1)] & stoi(I_imm);
         
-        I_imm = toBinStr(stoi(rs2));
+        I_imm = toBinStr(stoi(I_imm));
         rd = toBinStr(stoi(rd));
         rs1 = toBinStr(stoi(rs1));
         
@@ -786,19 +786,19 @@ string machinecode (string s ,string input) //machinecode
         rs1= input.substr(0 ,input.find(','));
         input.erase(0 , input.find(',')+1);
         
-        I_imm = input.substr(0 ,input.size());
+        rs2 = input.substr(0 ,input.size());
         
-        I_imm = removeExtras(rs2);
+        rs2 = removeExtras(rs2);
         rs1 = removeExtras(rs1);
         rd = removeExtras(rd);
         
-        regs[stoi(rd)] = regs[stoi(rs1)] << stoi(I_imm);
+        regs[stoi(rd)] = regs[stoi(rs1)] << stoi(rs2);
         
-        I_imm = toBinStr(stoi(rs2));
+        rs2 = toBinStr(stoi(rs2));
         rd = toBinStr(stoi(rd));
         rs1 = toBinStr(stoi(rs1));
         
-        I_imm = paddingRegisters_I(I_imm);
+        rs2 = paddingRegisters_R(rs2);
         rs1 = paddingRegisters_R(rs1);
         rd = paddingRegisters_R(rd);
         
@@ -823,19 +823,19 @@ string machinecode (string s ,string input) //machinecode
         rs1= input.substr(0 ,input.find(','));
         input.erase(0 , input.find(',')+1);
         
-        I_imm = input.substr(0 ,input.size());
+        rs2 = input.substr(0 ,input.size());
         
-        I_imm = removeExtras(rs2);
+        rs2 = removeExtras(rs2);
         rs1 = removeExtras(rs1);
         rd = removeExtras(rd);
         
-        regs[stoi(rd)] = regs[stoi(rs1)] >> stoi(I_imm);
+        regs[stoi(rd)] = regs[stoi(rs1)] >> stoi(rs2);
         
-        I_imm = toBinStr(stoi(rs2));
+        rs2 = toBinStr(stoi(rs2));
         rd = toBinStr(stoi(rd));
         rs1 = toBinStr(stoi(rs1));
         
-        I_imm = paddingRegisters_I(I_imm);
+        rs2 = paddingRegisters_R(rs2);
         rs1 = paddingRegisters_R(rs1);
         rd = paddingRegisters_R(rd);
         

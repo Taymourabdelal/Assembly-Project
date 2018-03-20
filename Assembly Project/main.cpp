@@ -55,7 +55,7 @@ struct instWord
 int regs[32]={0};
 unsigned int pc = 0x0;
 
-char memory[8*1024];    // 8KB of memory located at address 0
+char memory[8*1024];    // 8KB of memory located at address 00
 
 void emitError(char *s)
 {

@@ -13,7 +13,7 @@
 using namespace std;
 
 
-string BinToHex(string s)
+string BinToHex(string s) // bin to hex fn
 {
      string binToHex = "0x";
 for(int i = 0; i < 32; i+=4)

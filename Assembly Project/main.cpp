@@ -223,7 +223,7 @@ void instAssembleExec(instWord&inst)
     }
     
 }
-string machinecode (string s ,string input)
+string machinecode (string s ,string input) //machinecode
 {
     string opcode ,zero = "0";
     string funct3 , funct7 ,machinecode ,rs1 , rs2, rd;

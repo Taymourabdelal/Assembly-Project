@@ -20,23 +20,23 @@ for(int i = 0; i < 32; i+=4)
 {
    string tmp = "0000";
    
-        tmp = s.substr(i, i+4);
-        if      (!tmp.compare("0000")) binToHex += "0";
-                else if (!tmp.compare("0001")) binToHex += "1";
-                else if (!tmp.compare("0010")) binToHex += "2";
-                else if (!tmp.compare("0011")) binToHex += "3";
-                else if (!tmp.compare("0100")) binToHex += "4";
-                else if (!tmp.compare("0101")) binToHex += "5";
-                else if (!tmp.compare("0110")) binToHex += "6";
-                else if (!tmp.compare("0111")) binToHex += "7";
-                else if (!tmp.compare("1000")) binToHex += "8";
-                else if (!tmp.compare("1001")) binToHex += "9";
-                else if (!tmp.compare("1010")) binToHex += "A";
-                else if (!tmp.compare("1011")) binToHex += "B";
-                else if (!tmp.compare("1100")) binToHex += "C";
-                else if (!tmp.compare("1101")) binToHex += "D";
-                else if (!tmp.compare("1110")) binToHex += "E";
-                else if (!tmp.compare("1111")) binToHex += "F";
+        tmp = s.substr(i,4);
+        if      (tmp == ("0000")) binToHex += "0";
+                else if (tmp == ("0001")) binToHex = binToHex + "1";
+                else if (tmp == ("0010")) binToHex += "2";
+                else if (tmp == ("0011")) binToHex += "3";
+                else if (tmp == ("0100")) binToHex += "4";
+                else if (tmp == ("0101")) binToHex += "5";
+                else if (tmp == ("0110")) binToHex += "6";
+                else if (tmp == ("0111")) binToHex += "7";
+                else if (tmp == ("1000")) binToHex += "8";
+                else if (tmp == ("1001")) binToHex += "9";
+                else if (tmp == ("1010")) binToHex += "A";
+                else if (tmp == ("1011")) binToHex += "B";
+                else if (tmp == ("1100")) binToHex += "C";
+                else if (tmp == ("1101")) binToHex += "D";
+                else if (tmp == ("1110")) binToHex += "E";
+                else if (tmp == ("1111")) binToHex += "F";
                                 else continue;
 
     }
@@ -200,13 +200,13 @@ void instAssembleExec(instWord&inst)
 }
 string machinecode (string s ,string input)
 {
-    string opcode;
+    string opcode ,zero = "0";
     string funct3 , funct7 ,machinecode ,rs1 , rs2, rd;
     if( s == "add")
     {
         opcode = "0110011";
         funct3 ="000";
-        funct7 = "000000";
+        funct7 = "0000000";
         
         rd = input.substr(0 ,input.find(','));
            input.erase(0 , input.find(',')+1);
@@ -216,34 +216,63 @@ string machinecode (string s ,string input)
         
         rs2 = input.substr(0 ,input.size());
         
-        for (int i = 0 ; i < rs2.size() ; i++)
-        {
-            if( rs2[i] == 'x' || rs2[i] == '/r')
-            {
-                rs2.erase(i, 1);
-            }
-        }
-        for (int i = 0 ; i < rs1.size() ; i++)
-        {
-            if( rs1[i] == 'x' || rs1[i] == '/r')
-            {
-                rs1.erase(i, 1);
-            }
-        }
-        for (int i = 0 ; i < rd.size() ; i++)
-        {
-            if( rd[i] == 'x' || rd[i] == '/r')
-            {
-                rd.erase(i, 1);
-            }
-        }
+        rs2 = removeExtras(rs2);
+        rs1 = removeExtras(rs1);
+        rd = removeExtras(rd);
+        
+        regs[stoi(rd)] = regs[stoi(rs1)] + regs[stoi(rs2)];
+        
         rs2 = toBinStr(stoi(rs2));
         rd = toBinStr(stoi(rd));
         rs1 = toBinStr(stoi(rs1));
         
+        rs2 = paddingRegisters(rs2);
+          rs1 = paddingRegisters(rs1);
+          rd = paddingRegisters(rd);
         
-        machinecode ="0000000" + rs2 +rs1 + funct3 + rd + opcode;
+         machinecode = funct7 + rs2+ rs1 + funct3 + rd + opcode;
+        
         cout << endl << machinecode<<endl;
+        
+        cout << BinToHex(machinecode)<<endl;
+    }
+    
+    else if ( s == "sub")
+    {
+         opcode = "0110011";
+        funct7 =  "0100000";
+        funct3 = "000";
+        
+        rd = input.substr(0 ,input.find(','));
+        input.erase(0 , input.find(',')+1);
+        
+        rs1= input.substr(0 ,input.find(','));
+        input.erase(0 , input.find(',')+1);
+        
+        rs2 = input.substr(0 ,input.size());
+        
+        rs2 = removeExtras(rs2);
+        rs1 = removeExtras(rs1);
+        rd = removeExtras(rd);
+        
+        regs[stoi(rd)] = regs[stoi(rs1)] - regs[stoi(rs2)];
+        
+        rs2 = toBinStr(stoi(rs2));
+        rd = toBinStr(stoi(rd));
+        rs1 = toBinStr(stoi(rs1));
+        
+        rs2 = paddingRegisters(rs2);
+        rs1 = paddingRegisters(rs1);
+        rd = paddingRegisters(rd);
+        
+        machinecode = funct7 + rs2+ rs1 + funct3 + rd + opcode;
+        
+        cout << endl << machinecode<<endl;
+        
+        cout << BinToHex(machinecode)<<endl;
+        
+        
+        
     }
     
     return machinecode;
@@ -259,7 +288,7 @@ int main()
     string funct;
    
     
-    inFile.open("/Users/Aly/Desktop/Assembly project/Assembly-Project/Assembly Project/mult.txt");
+    inFile.open("mult.txt");
     refrence.open("refrencecard.txt");
     if(inFile.is_open())
     {

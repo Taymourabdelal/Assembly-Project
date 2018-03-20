@@ -3,4 +3,5 @@ addi x9,x0,30
 addi x8,x0,0			# the product
 add x8,x8,x9
 addi x18,x18,-1
+sub x9,x20,x9
 

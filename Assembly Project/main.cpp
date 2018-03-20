@@ -55,7 +55,7 @@ struct instWord
 int regs[32]={0};
 unsigned int pc = 0x0;
 
-char memory[8*1024];    // 8KB of memory located at address 0
+char memory[8*1024];    // 8KB of memory located at address 00
 
 void emitError(char *s)
 {
@@ -67,27 +67,23 @@ void printPrefix(unsigned int instA, unsigned int instCode)
 {
     cout << "0x" << hex << std::setfill('0') << std::setw(8) << instA << "\t0x" << hex << std::setw(8) << instCode;
 }
-string toBinStr(unsigned int val)
+
+int toBinStr(int n)
 {
-    // mask has only the leftmost bit set.
-    unsigned int mask = 1u << (std::numeric_limits<unsigned>::digits-1) ;
+    int binaryNumber = 0;
+    int remainder, i = 1;
     
-    // skip leading bits that are not set.
-    while ( 0 == (val & mask) && mask != 0 )
-        mask >>= 1 ; // shift all bits to the right by 1
-    
-    string binStr ;
-    binStr.reserve(std::numeric_limits<unsigned>::digits+1) ;
-    
-    do
+    while (n!=0)
     {
-        // add a '1' or '0' depending the current bit.
-        binStr += static_cast<char>(val & mask) + '0' ;
-        
-    } while ( (mask>>=1) != 0 ) ; // next bit, when mask is 0 we've processed all bits
-    
-    return binStr ;
+        remainder = n%2;
+                n /= 2;
+        binaryNumber += remainder*i;
+        i *= 10;
+    }
+    return binaryNumber;
 }
+
+
 string format ( string funct)
 {
     ifstream input;
@@ -262,7 +258,7 @@ int main()
     string funct;
    
     
-    inFile.open("mult.txt");
+    inFile.open("/Users/Aly/Desktop/Assembly project/Assembly-Project/Assembly Project/mult.txt");
     refrence.open("refrencecard.txt");
     if(inFile.is_open())
     {

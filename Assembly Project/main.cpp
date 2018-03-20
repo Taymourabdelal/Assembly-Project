@@ -81,7 +81,7 @@ string removeExtras(string s)
     return s;
 }
 
-string paddingRegisters(string s)
+string paddingRegisters_R(string s) //r type
 {   int  max = s.size();
     if ( s.length() < 5)
     {
@@ -93,6 +93,20 @@ string paddingRegisters(string s)
     
     return s;
 }
+string paddingRegisters_I(string s) //r type
+{   int  max = s.size();
+    if ( s.length() < 12)
+    {
+        for (int i = 0; i < 12 - max ; i ++)
+        {
+            s = "0"+s;
+        }
+    }
+    
+    return s;
+}
+
+
 
 string toBinStr(int n)
 {
@@ -226,7 +240,7 @@ void instAssembleExec(instWord&inst)
 string machinecode (string s ,string input) //machinecode
 {
     string opcode ,zero = "0";
-    string funct3 , funct7 ,machinecode ,rs1 , rs2, rd;
+    string funct3 , funct7 ,machinecode ,rs1 , rs2, rd, I_imm;
     if( s == "add")
     {
         opcode = "0110011";
@@ -254,9 +268,9 @@ string machinecode (string s ,string input) //machinecode
         rd = toBinStr(stoi(rd));
         rs1 = toBinStr(stoi(rs1));
         
-        rs2 = paddingRegisters(rs2);
-        rs1 = paddingRegisters(rs1);
-        rd = paddingRegisters(rd);
+        rs2 = paddingRegisters_R(rs2);
+        rs1 = paddingRegisters_R(rs1);
+        rd = paddingRegisters_R(rd);
         
         
 
@@ -292,9 +306,9 @@ string machinecode (string s ,string input) //machinecode
         rd = toBinStr(stoi(rd));
         rs1 = toBinStr(stoi(rs1));
         
-        rs2 = paddingRegisters(rs2);
-        rs1 = paddingRegisters(rs1);
-        rd = paddingRegisters(rd);
+        rs2 = paddingRegisters_R(rs2);
+        rs1 = paddingRegisters_R(rs1);
+        rd = paddingRegisters_R(rd);
         
         machinecode = funct7 + rs2+ rs1 + funct3 + rd + opcode;
         
@@ -332,9 +346,9 @@ string machinecode (string s ,string input) //machinecode
         rd = toBinStr(stoi(rd));
         rs1 = toBinStr(stoi(rs1));
         
-        rs2 = paddingRegisters(rs2);
-        rs1 = paddingRegisters(rs1);
-        rd = paddingRegisters(rd);
+        rs2 = paddingRegisters_R(rs2);
+        rs1 = paddingRegisters_R(rs1);
+        rd = paddingRegisters_R(rd);
         
         machinecode = funct7 + rs2+ rs1 + funct3 + rd + opcode;
         
@@ -367,9 +381,9 @@ string machinecode (string s ,string input) //machinecode
         rd = toBinStr(stoi(rd));
         rs1 = toBinStr(stoi(rs1));
         
-        rs2 = paddingRegisters(rs2);
-        rs1 = paddingRegisters(rs1);
-        rd = paddingRegisters(rd);
+        rs2 = paddingRegisters_R(rs2);
+        rs1 = paddingRegisters_R(rs1);
+        rd = paddingRegisters_R(rd);
         
         machinecode = funct7 + rs2+ rs1 + funct3 + rd + opcode;
         
@@ -404,9 +418,9 @@ string machinecode (string s ,string input) //machinecode
         rd = toBinStr(stoi(rd));
         rs1 = toBinStr(stoi(rs1));
         
-        rs2 = paddingRegisters(rs2);
-        rs1 = paddingRegisters(rs1);
-        rd = paddingRegisters(rd);
+        rs2 = paddingRegisters_R(rs2);
+        rs1 = paddingRegisters_R(rs1);
+        rd = paddingRegisters_R(rd);
         
         machinecode = funct7 + rs2+ rs1 + funct3 + rd + opcode;
         
@@ -441,9 +455,9 @@ string machinecode (string s ,string input) //machinecode
         rd = toBinStr(stoi(rd));
         rs1 = toBinStr(stoi(rs1));
         
-        rs2 = paddingRegisters(rs2);
-        rs1 = paddingRegisters(rs1);
-        rd = paddingRegisters(rd);
+        rs2 = paddingRegisters_R(rs2);
+        rs1 = paddingRegisters_R(rs1);
+        rd = paddingRegisters_R(rd);
         
         machinecode = funct7 + rs2+ rs1 + funct3 + rd + opcode;
         
@@ -478,9 +492,9 @@ string machinecode (string s ,string input) //machinecode
         rd = toBinStr(stoi(rd));
         rs1 = toBinStr(stoi(rs1));
         
-        rs2 = paddingRegisters(rs2);
-        rs1 = paddingRegisters(rs1);
-        rd = paddingRegisters(rd);
+        rs2 = paddingRegisters_R(rs2);
+        rs1 = paddingRegisters_R(rs1);
+        rd = paddingRegisters_R(rd);
         
         machinecode = funct7 + rs2+ rs1 + funct3 + rd + opcode;
         
@@ -515,9 +529,9 @@ string machinecode (string s ,string input) //machinecode
         rd = toBinStr(stoi(rd));
         rs1 = toBinStr(stoi(rs1));
         
-        rs2 = paddingRegisters(rs2);
-        rs1 = paddingRegisters(rs1);
-        rd = paddingRegisters(rd);
+        rs2 = paddingRegisters_R(rs2);
+        rs1 = paddingRegisters_R(rs1);
+        rd = paddingRegisters_R(rd);
         
         machinecode = funct7 + rs2+ rs1 + funct3 + rd + opcode;
         
@@ -554,9 +568,9 @@ string machinecode (string s ,string input) //machinecode
         rd = toBinStr(stoi(rd));
         rs1 = toBinStr(stoi(rs1));
         
-        rs2 = paddingRegisters(rs2);
-        rs1 = paddingRegisters(rs1);
-        rd = paddingRegisters(rd);
+        rs2 = paddingRegisters_R(rs2);
+        rs1 = paddingRegisters_R(rs1);
+        rd = paddingRegisters_R(rd);
         
         machinecode = funct7 + rs2+ rs1 + funct3 + rd + opcode;
         
@@ -566,7 +580,271 @@ string machinecode (string s ,string input) //machinecode
     }
     
     
+    else if ( s == "addi")
+    {
+        regs [8] = 10;
+        regs[9] = 5;
+        regs[10] = 2 ;
+        opcode = "0010011";
+        funct3 = "000";
+        
+        
+        rd = input.substr(0 ,input.find(','));
+        input.erase(0 , input.find(',')+1);
+        
+        rs1= input.substr(0 ,input.find(','));
+        input.erase(0 , input.find(',')+1);
+        
+        I_imm = input.substr(0 ,input.size());
+        
+        I_imm = removeExtras(rs2);
+        rs1 = removeExtras(rs1);
+        rd = removeExtras(rd);
+        
+        regs[stoi(rd)] = regs[stoi(rs1)] + stoi(I_imm);
+        
+        I_imm = toBinStr(stoi(rs2));
+        rd = toBinStr(stoi(rd));
+        rs1 = toBinStr(stoi(rs1));
+        
+        I_imm = paddingRegisters_I(I_imm);
+        rs1 = paddingRegisters_R(rs1);
+        rd = paddingRegisters_R(rd);
+        
+        machinecode = I_imm + rs1 + funct3 + rd + opcode;
+        
+        cout << endl << machinecode<<endl;
+        
+        cout << BinToHex(machinecode)<<endl;
+    }
 
+    
+    else if ( s == "slti")
+    {
+        regs [8] = 10;
+        regs[9] = 5;
+        regs[10] = 2 ;
+        opcode = "0010011";
+        funct3 = "010";
+        
+        
+        rd = input.substr(0 ,input.find(','));
+        input.erase(0 , input.find(',')+1);
+        
+        rs1= input.substr(0 ,input.find(','));
+        input.erase(0 , input.find(',')+1);
+        
+        I_imm = input.substr(0 ,input.size());
+        
+        I_imm = removeExtras(rs2);
+        rs1 = removeExtras(rs1);
+        rd = removeExtras(rd);
+        
+        if(regs[stoi(rs1)] < stoi(I_imm))
+            regs[stoi(rd)] = 1;
+        else
+            regs[stoi(rd)] = 0;
+        
+        I_imm = toBinStr(stoi(rs2));
+        rd = toBinStr(stoi(rd));
+        rs1 = toBinStr(stoi(rs1));
+        
+        I_imm = paddingRegisters_I(I_imm);
+        rs1 = paddingRegisters_R(rs1);
+        rd = paddingRegisters_R(rd);
+        
+        machinecode = I_imm + rs1 + funct3 + rd + opcode;
+        
+        cout << endl << machinecode<<endl;
+        
+        cout << BinToHex(machinecode)<<endl;
+    }
+    else if ( s == "ori")
+    {
+        regs [8] = 10;
+        regs[9] = 5;
+        regs[10] = 2 ;
+        opcode = "0010011";
+        funct3 = "110";
+        
+        
+        rd = input.substr(0 ,input.find(','));
+        input.erase(0 , input.find(',')+1);
+        
+        rs1= input.substr(0 ,input.find(','));
+        input.erase(0 , input.find(',')+1);
+        
+        I_imm = input.substr(0 ,input.size());
+        
+        I_imm = removeExtras(rs2);
+        rs1 = removeExtras(rs1);
+        rd = removeExtras(rd);
+        
+        regs[stoi(rd)] = regs[stoi(rs1)] | stoi(I_imm);
+        
+        I_imm = toBinStr(stoi(rs2));
+        rd = toBinStr(stoi(rd));
+        rs1 = toBinStr(stoi(rs1));
+        
+        I_imm = paddingRegisters_I(I_imm);
+        rs1 = paddingRegisters_R(rs1);
+        rd = paddingRegisters_R(rd);
+        
+        machinecode = I_imm + rs1 + funct3 + rd + opcode;
+        
+        cout << endl << machinecode<<endl;
+        
+        cout << BinToHex(machinecode)<<endl;
+    }
+
+    else if ( s == "xori")
+    {
+        regs [8] = 10;
+        regs[9] = 5;
+        regs[10] = 2 ;
+        opcode = "0010011";
+        funct3 = "10";
+        
+        
+        rd = input.substr(0 ,input.find(','));
+        input.erase(0 , input.find(',')+1);
+        
+        rs1= input.substr(0 ,input.find(','));
+        input.erase(0 , input.find(',')+1);
+        
+        I_imm = input.substr(0 ,input.size());
+        
+        I_imm = removeExtras(rs2);
+        rs1 = removeExtras(rs1);
+        rd = removeExtras(rd);
+        
+        regs[stoi(rd)] = regs[stoi(rs1)] ^ stoi(I_imm);
+        
+        I_imm = toBinStr(stoi(rs2));
+        rd = toBinStr(stoi(rd));
+        rs1 = toBinStr(stoi(rs1));
+        
+        I_imm = paddingRegisters_I(I_imm);
+        rs1 = paddingRegisters_R(rs1);
+        rd = paddingRegisters_R(rd);
+        
+        machinecode = I_imm + rs1 + funct3 + rd + opcode;
+        
+        cout << endl << machinecode<<endl;
+        
+        cout << BinToHex(machinecode)<<endl;
+    }
+    else if ( s == "andi")
+    {
+        regs [8] = 10;
+        regs[9] = 5;
+        regs[10] = 2 ;
+        opcode = "0010011";
+        funct3 = "111";
+        
+        
+        rd = input.substr(0 ,input.find(','));
+        input.erase(0 , input.find(',')+1);
+        
+        rs1= input.substr(0 ,input.find(','));
+        input.erase(0 , input.find(',')+1);
+        
+        I_imm = input.substr(0 ,input.size());
+        
+        I_imm = removeExtras(rs2);
+        rs1 = removeExtras(rs1);
+        rd = removeExtras(rd);
+        
+        regs[stoi(rd)] = regs[stoi(rs1)] & stoi(I_imm);
+        
+        I_imm = toBinStr(stoi(rs2));
+        rd = toBinStr(stoi(rd));
+        rs1 = toBinStr(stoi(rs1));
+        
+        I_imm = paddingRegisters_I(I_imm);
+        rs1 = paddingRegisters_R(rs1);
+        rd = paddingRegisters_R(rd);
+        
+        machinecode = I_imm + rs1 + funct3 + rd + opcode;
+        
+        cout << endl << machinecode<<endl;
+        
+        cout << BinToHex(machinecode)<<endl;
+    }
+    else if ( s == "slli")
+    {
+        regs [8] = 10;
+        regs[9] = 5;
+        regs[10] = 2 ;
+        opcode = "0010011";
+        funct3 = "001";
+        
+        
+        rd = input.substr(0 ,input.find(','));
+        input.erase(0 , input.find(',')+1);
+        
+        rs1= input.substr(0 ,input.find(','));
+        input.erase(0 , input.find(',')+1);
+        
+        I_imm = input.substr(0 ,input.size());
+        
+        I_imm = removeExtras(rs2);
+        rs1 = removeExtras(rs1);
+        rd = removeExtras(rd);
+        
+        regs[stoi(rd)] = regs[stoi(rs1)] << stoi(I_imm);
+        
+        I_imm = toBinStr(stoi(rs2));
+        rd = toBinStr(stoi(rd));
+        rs1 = toBinStr(stoi(rs1));
+        
+        I_imm = paddingRegisters_I(I_imm);
+        rs1 = paddingRegisters_R(rs1);
+        rd = paddingRegisters_R(rd);
+        
+        machinecode = I_imm + rs1 + funct3 + rd + opcode;
+        
+        cout << endl << machinecode<<endl;
+        
+        cout << BinToHex(machinecode)<<endl;
+    }
+    else if ( s == "srli")
+    {
+        regs [8] = 10;
+        regs[9] = 5;
+        regs[10] = 2 ;
+        opcode = "0010011";
+        funct3 = "101";
+        
+        
+        rd = input.substr(0 ,input.find(','));
+        input.erase(0 , input.find(',')+1);
+        
+        rs1= input.substr(0 ,input.find(','));
+        input.erase(0 , input.find(',')+1);
+        
+        I_imm = input.substr(0 ,input.size());
+        
+        I_imm = removeExtras(rs2);
+        rs1 = removeExtras(rs1);
+        rd = removeExtras(rd);
+        
+        regs[stoi(rd)] = regs[stoi(rs1)] >> stoi(I_imm);
+        
+        I_imm = toBinStr(stoi(rs2));
+        rd = toBinStr(stoi(rd));
+        rs1 = toBinStr(stoi(rs1));
+        
+        I_imm = paddingRegisters_I(I_imm);
+        rs1 = paddingRegisters_R(rs1);
+        rd = paddingRegisters_R(rd);
+        
+        machinecode = I_imm + rs1 + funct3 + rd + opcode;
+        
+        cout << endl << machinecode<<endl;
+        
+        cout << BinToHex(machinecode)<<endl;
+    }
     
 
 

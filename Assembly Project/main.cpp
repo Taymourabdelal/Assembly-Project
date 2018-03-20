@@ -68,8 +68,9 @@ void printPrefix(unsigned int instA, unsigned int instCode)
     cout << "0x" << hex << std::setfill('0') << std::setw(8) << instA << "\t0x" << hex << std::setw(8) << instCode;
 }
 
-int toBinStr(int n)
+string toBinStr(int n)
 {
+    
     int binaryNumber = 0;
     int remainder, i = 1;
     
@@ -80,7 +81,7 @@ int toBinStr(int n)
         binaryNumber += remainder*i;
         i *= 10;
     }
-    return binaryNumber;
+    return to_string(binaryNumber);
 }
 
 

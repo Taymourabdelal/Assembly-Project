@@ -87,7 +87,7 @@ string format ( string funct)
 //
 //
 //}
-void parse (Formats code , string s) // Function-Parse
+string parse (Formats code , string &  s) // Function-Parse
 {
 
     string funct , rs, rd ,rt;
@@ -95,23 +95,25 @@ void parse (Formats code , string s) // Function-Parse
     
    funct =  s.substr(0 , s.find(' '));
     s.erase(0 , s.find(' '));
-    code.type = format(funct);
     
-    if (code.type == "R")
-    {
+    return funct;
+    //code.type = format(funct);
     
-
-    code.rcode.rd= s.substr(0 ,s.find(','));
-    s.erase(0 , s.find(',')+1);
-    
-    
-    code.rcode.rs1= s.substr(0 ,s.find(','));
-    s.erase(0 , s.find(',')+1);
-        
-    code.rcode.rs2 = s.substr(0 ,s.size());
-
-    
-    }
+//    if (code.type == "R")
+//    {
+//
+//
+//    rs1 = s.substr(0 ,s.find(','));
+//    s.erase(0 , s.find(',')+1);
+//
+//
+//    code.rcode.rs1= s.substr(0 ,s.find(','));
+//    s.erase(0 , s.find(',')+1);
+//
+//    code.rcode.rs2 = s.substr(0 ,s.size());
+//
+//
+//    }
    
         
     
@@ -168,6 +170,56 @@ void instAssembleExec(instWord&inst)
     }
     
 }
+string machinecode (string s ,string input)
+{
+    string opcode;
+    string funct3 , funct7 ,machinecode ,rs1 , rs2, rd;
+    if( s == "add")
+    {
+        opcode = "0110011";
+        funct3 ="000";
+        funct7 = "000000";
+        
+        rd = input.substr(0 ,input.find(','));
+           input.erase(0 , input.find(',')+1);
+        
+        rs1= input.substr(0 ,input.find(','));
+            input.erase(0 , input.find(',')+1);
+        
+        rs2 = input.substr(0 ,input.size());
+        
+        for (int i = 0 ; i < rs2.size() ; i++)
+        {
+            if( rs2[i] == 'x' || rs2[i] == '/r')
+            {
+                rs2.erase(i, 1);
+            }
+        }
+        for (int i = 0 ; i < rs1.size() ; i++)
+        {
+            if( rs1[i] == 'x' || rs1[i] == '/r')
+            {
+                rs1.erase(i, 1);
+            }
+        }
+        for (int i = 0 ; i < rd.size() ; i++)
+        {
+            if( rd[i] == 'x' || rd[i] == '/r')
+            {
+                rd.erase(i, 1);
+            }
+        }
+        rs2 = toBinStr(stoi(rs2));
+        rd = toBinStr(stoi(rd));
+        rs1 = toBinStr(stoi(rs1));
+        
+        
+        machinecode ="0000000" + rs2 +rs1 + funct3 + rd + opcode;
+        cout << endl << machinecode<<endl;
+    }
+    
+    return machinecode;
+}
 
 int main()
 {
@@ -176,6 +228,7 @@ int main()
     ofstream outFile;
     instWord W;
     string input;
+    string funct;
    
     
     inFile.open("mult.txt");
@@ -187,7 +240,8 @@ int main()
         {
             getline (inFile, input);
             
-            parse(formatcode, input);        //parse instText into its instruction format fields
+            funct = parse(formatcode, input);
+           string machinecodes = machinecode (funct, input);//parse instText into its instruction format fields
             instAssembleExec(W);   //Generate instruction machine code and execute instruction
             printPrefix(pc, W.instMachineCode);
 

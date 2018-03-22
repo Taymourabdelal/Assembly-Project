@@ -189,7 +189,7 @@ string parse (Formats code , string &  s) // Function-Parse
     
     
     //
-    //
+    //dd
     //    cout << funct << endl;
     //
     //

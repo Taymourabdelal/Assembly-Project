@@ -16,3 +16,14 @@ mydiv_end:
 add	x10,x0,x6		# result = i
 add	x11,x0,x10		# rem   = a
 jalr	x0,x1,0
+
+
+
+
+
+addi x18,x0,20
+addi x9,x0,30
+addi x8,x0,0			# the product
+add x9,x8,x9
+addi x18,x18,-1
+sub x9,x20,x9

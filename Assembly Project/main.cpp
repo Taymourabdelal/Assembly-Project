@@ -619,7 +619,7 @@ string machinecode (string s ,string input) //machinecode
     }
 
     
-    else if ( s == "slti")
+    else if ( s == "slti")////////////slti////////////////
     {
         regs [8] = 10;
         regs[9] = 5;
@@ -659,7 +659,7 @@ string machinecode (string s ,string input) //machinecode
         
         cout << BinToHex(machinecode)<<endl;
     }
-    else if ( s == "ori")
+    else if ( s == "ori") /////////////// ori//////////
     {
         regs [8] = 10;
         regs[9] = 5;
@@ -861,7 +861,7 @@ int main()
     string funct;
     
     
-    inFile.open("/Users/Aly/Desktop/Assembly project/Assembly-Project/Assembly Project/mult.txt");
+    inFile.open("mult.txt");
     refrence.open("refrencecard.txt");
     if(inFile.is_open())
     {

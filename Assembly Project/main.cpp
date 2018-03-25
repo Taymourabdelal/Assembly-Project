@@ -845,6 +845,31 @@ string machinecode (string s ,string input) //machinecode
         
         cout << BinToHex(machinecode)<<endl;
     }
+    else if (s == "syscall")
+    {
+        if (regs[2]== 1)
+            cout << regs[4];
+        else if (regs[2] == 2)
+            cout << regs[5];
+        else if (regs[2] == 3)
+            cout << regs[5];
+        else if (regs[2] == 4)
+            cout << regs[4];
+        else if (regs[2] == 5)
+            cin>> regs[2];
+        else if (regs[2] == 6)///fein f0 dah
+            cin>> regs[4];
+        else if (regs[2] == 7)
+            cin>> regs[4];
+        else if (regs[2] == 8)
+            cin>> regs[4];
+        else if (regs[2] == 10)
+            cout << "end";
+        else if (regs[2] == 11)
+            cout << regs[4];
+        else if (regs[2] == 12)
+            cin >>regs[2];
+    }
     
 
 
